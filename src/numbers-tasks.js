@@ -177,12 +177,13 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const divider = 10 ** pow;
+  return Math.round(num / divider) * divider;
 }
 
 /**
- * Returns true is the number is prime; otherwise false. ПРОВЕРИТЬ
+ * Returns true is the number is prime; otherwise false.
  * See: https://en.wikipedia.org/wiki/Primality_test
  *
  * @param {number} n
@@ -208,7 +209,7 @@ function isPrime(n) {
 }
 
 /**
- * Tries to convert value to number and returns it if conversion was successful; СДЕЛАТЬ
+ * Tries to convert value to number and returns it if conversion was successful;
  * otherwise returns default value passed as a second argument.
  *
  * @param {any} value
@@ -222,8 +223,12 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  const number = Number(value);
+  if (!Number.isNaN(number)) {
+    return number;
+  }
+  return def;
 }
 
 /**
@@ -242,7 +247,7 @@ function getCube(num) {
 }
 
 /**
- * Returns the Fibonacci number located at the index position. СДЕЛАТЬ
+ * Returns the Fibonacci number located at the index position.
  *
  * @param {number} index
  * @return {number}
@@ -254,8 +259,23 @@ function getCube(num) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  if (index === 0) {
+    return 0;
+  }
+  if (index === 1) {
+    return 1;
+  }
+
+  let a = 0;
+  let b = 1;
+
+  for (let i = 2; i <= index; i += 1) {
+    const nextInSequence = a + b;
+    a = b;
+    b = nextInSequence;
+  }
+  return b;
 }
 
 /**
@@ -600,8 +620,14 @@ function getRandomInteger(min, max) {
  * @example:
  * 3, 4 => 5
  */
-function getHypotenuse(/* a, b */) {
-  throw new Error('Not implemented');
+function getHypotenuse(a, b) {
+  const squaredA = a * a;
+  const squaredB = b * b;
+
+  if (squaredA === Infinity || squaredB === Infinity) {
+    return Infinity;
+  }
+  return Math.sqrt(squaredA + squaredB);
 }
 
 /**
