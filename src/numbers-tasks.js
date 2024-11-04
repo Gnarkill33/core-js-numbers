@@ -69,9 +69,9 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  const sum1 = (x2 - x1) ** 2;
-  const sum2 = (y2 - y1) ** 2;
-  return Math.sqrt(sum1 + sum2);
+  const result1 = (x2 - x1) ** 2;
+  const result2 = (y2 - y1) ** 2;
+  return Math.sqrt(result1 + result2);
 }
 
 /**
@@ -93,7 +93,7 @@ function getLinearEquationRoot(a, b) {
 /**
  * Returns an angle (in radians) between two vectors given by xi and yi,
  * coordinates in Cartesian plane.
- * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations СДЕЛАТЬ
+ * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations
  *
  * @param {number} x1
  * @param {number} y1
@@ -107,8 +107,12 @@ function getLinearEquationRoot(a, b) {
  *   (0,-1) (1,0)    => π/2
  *   (0,1) (0,1)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  const dotProduct = x1 * x2 + y1 * y2;
+  const vectorLength1 = Math.sqrt(x1 * x1 + y1 * y1);
+  const vectorLength2 = Math.sqrt(x2 * x2 + y2 * y2);
+  const angleCosine = dotProduct / (vectorLength1 * vectorLength2);
+  return Math.acos(angleCosine);
 }
 
 /**
@@ -621,13 +625,7 @@ function getRandomInteger(min, max) {
  * 3, 4 => 5
  */
 function getHypotenuse(a, b) {
-  const squaredA = a * a;
-  const squaredB = b * b;
-
-  if (squaredA === Infinity || squaredB === Infinity) {
-    return Infinity;
-  }
-  return Math.sqrt(squaredA + squaredB);
+  return Math.hypot(a, b);
 }
 
 /**
